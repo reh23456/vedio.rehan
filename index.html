@@ -5,25 +5,24 @@
   <title>Redirecting...</title>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const email = params.get("email") || "unknown";
+    const id = params.get("id") || "unknown";
 
-    const webhook = "https://hook.eu2.make.com/sh5ngtzmtrpf6g51lpuup1gpxeso4lhj";
-    const redirectUrl = "https://www.loom.com/share/865e96e237ed4635a9686b27d0e09cbb?sid=056e4df0-d4d4-4ad8-8752-c2a85ce7e6d3";
-
-    // Send email to Make.com
-    fetch(webhook, {
+    // Send to Make.com webhook
+    fetch("https://hook.eu2.make.com/YOUR-WEBHOOK-ID", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, time: new Date().toISOString() })
+      body: JSON.stringify({
+        id: id,
+        opened_at: new Date().toISOString()
+      })
     });
 
-    
+    // Redirect to video
+    setTimeout(() => {
+      window.location.href = "https://www.loom.com/share/YOUR-VIDEO-ID";
+    }, 300);
   </script>
 </head>
-<body>
-  <p>Redirecting to your video...</p>
-</body>
-</html>
 <body>
   <p>Redirecting to your video...</p>
 </body>
