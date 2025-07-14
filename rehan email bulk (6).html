@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>Hello, World!</title>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    const webhook = "https://hook.eu2.make.com/sh5ngtzmtrpf6g51lpuup1gpxeso4lhj";
+    const loom = "https://www.loom.com/share/865e96e237ed4635a9686b27d0e09cbb?sid=056e4df0-d4d4-4ad8-8752-c2a85ce7e6d3";
+
+    // Try sendBeacon (best for tracking), fallback to fetch
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(webhook);
+    } else {
+      fetch(webhook, { method: "POST", mode: "no-cors" }).catch(() => {});
+    }
+
+    // Redirect IMMEDIATELY (no waiting for webhook)
+    window.location.href = loom;
+  </script>
 </head>
 <body>
-  <h1>
-    Hello, World!
-  </h1>
+  <p>Redirecting to your video...</p>
 </body>
 </html>
