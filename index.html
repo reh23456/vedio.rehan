@@ -4,36 +4,29 @@
   <meta charset="UTF-8">
   <title>Redirecting...</title>
   <script>
-    // ✅ Step 1: Read email from URL
     const params = new URLSearchParams(window.location.search);
     const email = params.get("email") || "unknown";
 
-    // ✅ Step 2: Set your webhook and video link
-    const webhook = "https://hook.eu2.make.com/sh5ngtzmtrpf6g51lpuup1gpxeso4lhj";
-    const loom = "https://www.loom.com/share/865e96e237ed4635a9686b27d0e09cbb?sid=056e4df0-d4d4-4ad8-8752-c2a85ce7e6d3";
+    const webhook = "https://hook.eu2.make.com/your-webhook-id";
+    const redirectUrl = "https://www.loom.com/share/your-video-id";
 
-    // ✅ Step 3: Data to send to Make.com
-    const data = {
-      email: email,
-      timestamp: new Date().toISOString()
-    };
+    // Send email to Make.com
+    fetch(webhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, time: new Date().toISOString() })
+    });
 
-    // ✅ Step 4: Send data (with fallback)
-    if (navigator.sendBeacon) {
-      const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-      navigator.sendBeacon(webhook, blob);
-    } else {
-      fetch(webhook, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      }).catch(() => {});
-    }
-
-    // ✅ Step 5: Redirect immediately
-    window.location.href = loom;
+    // Redirect after 300ms
+    setTimeout(() => {
+      window.location.href = redirectUrl;
+    }, 300);
   </script>
 </head>
+<body>
+  <p>Redirecting to your video...</p>
+</body>
+</html>
 <body>
   <p>Redirecting to your video...</p>
 </body>
