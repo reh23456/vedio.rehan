@@ -5,8 +5,8 @@
   <title>Redirecting...</title>
   <script>
     const params = new URLSearchParams(window.location.search);
-    const id = params.get("id") || "unknown";
-
+    const id = params.get("id");
+    const email = params.get("email")
     // Send to Make.com webhook
     fetch("https://hook.eu2.make.com/wvyfkhgfkxmrgrr9gkezt2jwb96djit6", {
       method: "POST",
